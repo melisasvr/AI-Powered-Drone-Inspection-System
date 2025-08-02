@@ -1,0 +1,860 @@
+{
+  "inspection_date": "2025-08-02T12:31:27.509791",
+  "total_anomalies": 70,
+  "flight_path_length": 75,
+  "battery_used": 0.7500000000003837,
+  "anomalies_by_type": {
+    "crack": 23,
+    "loose_bolt": 9,
+    "corrosion": 18,
+    "rust": 20
+  },
+  "anomalies_by_severity": {
+    "medium": 19,
+    "high": 19,
+    "low": 29,
+    "critical": 3
+  },
+  "detailed_anomalies": [
+    {
+      "id": "crack_1754163051366",
+      "type": "crack",
+      "confidence": 0.7331984916856247,
+      "position": [
+        0.0,
+        0.0,
+        98.0
+      ],
+      "timestamp": "2025-08-02T12:30:51.366220",
+      "severity": "medium"
+    },
+    {
+      "id": "loose_bolt_1754163051366",
+      "type": "loose_bolt",
+      "confidence": 0.8136827428638506,
+      "position": [
+        0.0,
+        0.0,
+        98.0
+      ],
+      "timestamp": "2025-08-02T12:30:51.366220",
+      "severity": "high"
+    },
+    {
+      "id": "corrosion_1754163051366",
+      "type": "corrosion",
+      "confidence": 0.7511637047830386,
+      "position": [
+        0.0,
+        0.0,
+        98.0
+      ],
+      "timestamp": "2025-08-02T12:30:51.366220",
+      "severity": "low"
+    },
+    {
+      "id": "crack_1754163052401",
+      "type": "crack",
+      "confidence": 0.8513279993214876,
+      "position": [
+        0.0,
+        0.0,
+        96.0
+      ],
+      "timestamp": "2025-08-02T12:30:52.401790",
+      "severity": "high"
+    },
+    {
+      "id": "loose_bolt_1754163052401",
+      "type": "loose_bolt",
+      "confidence": 0.8608726795897892,
+      "position": [
+        0.0,
+        0.0,
+        96.0
+      ],
+      "timestamp": "2025-08-02T12:30:52.401790",
+      "severity": "high"
+    },
+    {
+      "id": "rust_1754163052702",
+      "type": "rust",
+      "confidence": 0.8095462292227378,
+      "position": [
+        0.0,
+        0.0,
+        95.0
+      ],
+      "timestamp": "2025-08-02T12:30:52.702213",
+      "severity": "medium"
+    },
+    {
+      "id": "corrosion_1754163052702",
+      "type": "corrosion",
+      "confidence": 0.7561430866346784,
+      "position": [
+        0.0,
+        0.0,
+        95.0
+      ],
+      "timestamp": "2025-08-02T12:30:52.702213",
+      "severity": "high"
+    },
+    {
+      "id": "crack_1754163053025",
+      "type": "crack",
+      "confidence": 0.9497673822508218,
+      "position": [
+        0.0,
+        0.0,
+        94.0
+      ],
+      "timestamp": "2025-08-02T12:30:53.025213",
+      "severity": "high"
+    },
+    {
+      "id": "corrosion_1754163053466",
+      "type": "corrosion",
+      "confidence": 0.6987434416779377,
+      "position": [
+        0.0,
+        0.0,
+        93.0
+      ],
+      "timestamp": "2025-08-02T12:30:53.466186",
+      "severity": "high"
+    },
+    {
+      "id": "crack_1754163053853",
+      "type": "crack",
+      "confidence": 0.920069146925347,
+      "position": [
+        0.0,
+        0.0,
+        92.0
+      ],
+      "timestamp": "2025-08-02T12:30:53.853739",
+      "severity": "low"
+    },
+    {
+      "id": "loose_bolt_1754163053853",
+      "type": "loose_bolt",
+      "confidence": 0.9217720704899242,
+      "position": [
+        0.0,
+        0.0,
+        92.0
+      ],
+      "timestamp": "2025-08-02T12:30:53.853739",
+      "severity": "critical"
+    },
+    {
+      "id": "loose_bolt_1754163055096",
+      "type": "loose_bolt",
+      "confidence": 0.8688902692573357,
+      "position": [
+        0.0,
+        0.0,
+        89.0
+      ],
+      "timestamp": "2025-08-02T12:30:55.096828",
+      "severity": "critical"
+    },
+    {
+      "id": "rust_1754163055752",
+      "type": "rust",
+      "confidence": 0.7715907723648789,
+      "position": [
+        0.0,
+        0.0,
+        87.0
+      ],
+      "timestamp": "2025-08-02T12:30:55.752802",
+      "severity": "low"
+    },
+    {
+      "id": "corrosion_1754163056057",
+      "type": "corrosion",
+      "confidence": 0.6754601078056691,
+      "position": [
+        0.0,
+        0.0,
+        86.0
+      ],
+      "timestamp": "2025-08-02T12:30:56.057077",
+      "severity": "low"
+    },
+    {
+      "id": "rust_1754163056704",
+      "type": "rust",
+      "confidence": 0.6624256679900529,
+      "position": [
+        0.0,
+        0.0,
+        84.0
+      ],
+      "timestamp": "2025-08-02T12:30:56.704643",
+      "severity": "medium"
+    },
+    {
+      "id": "crack_1754163057281",
+      "type": "crack",
+      "confidence": 0.9409217001689584,
+      "position": [
+        0.0,
+        0.0,
+        82.0
+      ],
+      "timestamp": "2025-08-02T12:30:57.281802",
+      "severity": "low"
+    },
+    {
+      "id": "corrosion_1754163057857",
+      "type": "corrosion",
+      "confidence": 0.8115676517029714,
+      "position": [
+        0.0,
+        0.0,
+        80.0
+      ],
+      "timestamp": "2025-08-02T12:30:57.857184",
+      "severity": "medium"
+    },
+    {
+      "id": "crack_1754163058123",
+      "type": "crack",
+      "confidence": 0.7120471628911597,
+      "position": [
+        0.0,
+        0.0,
+        79.0
+      ],
+      "timestamp": "2025-08-02T12:30:58.123199",
+      "severity": "low"
+    },
+    {
+      "id": "rust_1754163058123",
+      "type": "rust",
+      "confidence": 0.8227341295628771,
+      "position": [
+        0.0,
+        0.0,
+        79.0
+      ],
+      "timestamp": "2025-08-02T12:30:58.123199",
+      "severity": "medium"
+    },
+    {
+      "id": "loose_bolt_1754163058447",
+      "type": "loose_bolt",
+      "confidence": 0.9313148146275289,
+      "position": [
+        0.0,
+        0.0,
+        78.0
+      ],
+      "timestamp": "2025-08-02T12:30:58.447998",
+      "severity": "high"
+    },
+    {
+      "id": "crack_1754163059075",
+      "type": "crack",
+      "confidence": 0.7279700365338209,
+      "position": [
+        0.0,
+        0.0,
+        76.0
+      ],
+      "timestamp": "2025-08-02T12:30:59.075014",
+      "severity": "low"
+    },
+    {
+      "id": "rust_1754163059400",
+      "type": "rust",
+      "confidence": 0.802445362111495,
+      "position": [
+        0.0,
+        0.0,
+        75.0
+      ],
+      "timestamp": "2025-08-02T12:30:59.400339",
+      "severity": "low"
+    },
+    {
+      "id": "crack_1754163059697",
+      "type": "crack",
+      "confidence": 0.798783793939629,
+      "position": [
+        0.0,
+        0.0,
+        74.0
+      ],
+      "timestamp": "2025-08-02T12:30:59.697467",
+      "severity": "medium"
+    },
+    {
+      "id": "crack_1754163060112",
+      "type": "crack",
+      "confidence": 0.9088994280421334,
+      "position": [
+        0.0,
+        0.0,
+        73.0
+      ],
+      "timestamp": "2025-08-02T12:31:00.112457",
+      "severity": "low"
+    },
+    {
+      "id": "rust_1754163060604",
+      "type": "rust",
+      "confidence": 0.6541749492480902,
+      "position": [
+        0.0,
+        0.0,
+        72.0
+      ],
+      "timestamp": "2025-08-02T12:31:00.604078",
+      "severity": "medium"
+    },
+    {
+      "id": "rust_1754163061168",
+      "type": "rust",
+      "confidence": 0.7710311243618768,
+      "position": [
+        0.0,
+        0.0,
+        71.0
+      ],
+      "timestamp": "2025-08-02T12:31:01.168050",
+      "severity": "low"
+    },
+    {
+      "id": "corrosion_1754163061168",
+      "type": "corrosion",
+      "confidence": 0.8332223379232935,
+      "position": [
+        0.0,
+        0.0,
+        71.0
+      ],
+      "timestamp": "2025-08-02T12:31:01.168050",
+      "severity": "high"
+    },
+    {
+      "id": "crack_1754163061585",
+      "type": "crack",
+      "confidence": 0.7178972735954409,
+      "position": [
+        0.0,
+        0.0,
+        70.0
+      ],
+      "timestamp": "2025-08-02T12:31:01.585183",
+      "severity": "high"
+    },
+    {
+      "id": "crack_1754163062458",
+      "type": "crack",
+      "confidence": 0.7853465593987894,
+      "position": [
+        0.0,
+        0.0,
+        68.0
+      ],
+      "timestamp": "2025-08-02T12:31:02.458453",
+      "severity": "low"
+    },
+    {
+      "id": "corrosion_1754163062835",
+      "type": "corrosion",
+      "confidence": 0.7430520098778004,
+      "position": [
+        0.0,
+        0.0,
+        67.0
+      ],
+      "timestamp": "2025-08-02T12:31:02.835347",
+      "severity": "high"
+    },
+    {
+      "id": "corrosion_1754163063393",
+      "type": "corrosion",
+      "confidence": 0.7151875287877375,
+      "position": [
+        0.0,
+        0.0,
+        66.0
+      ],
+      "timestamp": "2025-08-02T12:31:03.393151",
+      "severity": "low"
+    },
+    {
+      "id": "rust_1754163063793",
+      "type": "rust",
+      "confidence": 0.8655528713626944,
+      "position": [
+        0.0,
+        0.0,
+        65.0
+      ],
+      "timestamp": "2025-08-02T12:31:03.793912",
+      "severity": "low"
+    },
+    {
+      "id": "crack_1754163064079",
+      "type": "crack",
+      "confidence": 0.8949670187390304,
+      "position": [
+        0.0,
+        0.0,
+        64.0
+      ],
+      "timestamp": "2025-08-02T12:31:04.079632",
+      "severity": "low"
+    },
+    {
+      "id": "crack_1754163064399",
+      "type": "crack",
+      "confidence": 0.7776912378526173,
+      "position": [
+        0.0,
+        0.0,
+        63.0
+      ],
+      "timestamp": "2025-08-02T12:31:04.400473",
+      "severity": "medium"
+    },
+    {
+      "id": "rust_1754163064400",
+      "type": "rust",
+      "confidence": 0.8109180466654315,
+      "position": [
+        0.0,
+        0.0,
+        63.0
+      ],
+      "timestamp": "2025-08-02T12:31:04.400473",
+      "severity": "medium"
+    },
+    {
+      "id": "rust_1754163065112",
+      "type": "rust",
+      "confidence": 0.7895237511148857,
+      "position": [
+        0.0,
+        0.0,
+        61.0
+      ],
+      "timestamp": "2025-08-02T12:31:05.112371",
+      "severity": "medium"
+    },
+    {
+      "id": "crack_1754163065534",
+      "type": "crack",
+      "confidence": 0.7794488639565864,
+      "position": [
+        0.0,
+        0.0,
+        60.0
+      ],
+      "timestamp": "2025-08-02T12:31:05.534392",
+      "severity": "low"
+    },
+    {
+      "id": "rust_1754163065534",
+      "type": "rust",
+      "confidence": 0.8858712495550503,
+      "position": [
+        0.0,
+        0.0,
+        60.0
+      ],
+      "timestamp": "2025-08-02T12:31:05.534392",
+      "severity": "low"
+    },
+    {
+      "id": "rust_1754163066085",
+      "type": "rust",
+      "confidence": 0.6782657478684797,
+      "position": [
+        0.0,
+        0.0,
+        59.0
+      ],
+      "timestamp": "2025-08-02T12:31:06.085621",
+      "severity": "low"
+    },
+    {
+      "id": "crack_1754163066665",
+      "type": "crack",
+      "confidence": 0.9233842900601501,
+      "position": [
+        0.0,
+        0.0,
+        58.0
+      ],
+      "timestamp": "2025-08-02T12:31:06.665441",
+      "severity": "medium"
+    },
+    {
+      "id": "rust_1754163066665",
+      "type": "rust",
+      "confidence": 0.8126679693818114,
+      "position": [
+        0.0,
+        0.0,
+        58.0
+      ],
+      "timestamp": "2025-08-02T12:31:06.665441",
+      "severity": "low"
+    },
+    {
+      "id": "crack_1754163068376",
+      "type": "crack",
+      "confidence": 0.8497460589946293,
+      "position": [
+        0.0,
+        0.0,
+        55.0
+      ],
+      "timestamp": "2025-08-02T12:31:08.376722",
+      "severity": "high"
+    },
+    {
+      "id": "corrosion_1754163068971",
+      "type": "corrosion",
+      "confidence": 0.6875060499364937,
+      "position": [
+        0.0,
+        0.0,
+        54.0
+      ],
+      "timestamp": "2025-08-02T12:31:08.971943",
+      "severity": "medium"
+    },
+    {
+      "id": "rust_1754163069657",
+      "type": "rust",
+      "confidence": 0.7730022622749035,
+      "position": [
+        0.0,
+        0.0,
+        53.2
+      ],
+      "timestamp": "2025-08-02T12:31:09.657511",
+      "severity": "low"
+    },
+    {
+      "id": "loose_bolt_1754163069657",
+      "type": "loose_bolt",
+      "confidence": 0.9485712644139805,
+      "position": [
+        0.0,
+        0.0,
+        53.2
+      ],
+      "timestamp": "2025-08-02T12:31:09.657511",
+      "severity": "critical"
+    },
+    {
+      "id": "corrosion_1754163070412",
+      "type": "corrosion",
+      "confidence": 0.7719642959271987,
+      "position": [
+        0.0,
+        0.0,
+        52.56
+      ],
+      "timestamp": "2025-08-02T12:31:10.412193",
+      "severity": "low"
+    },
+    {
+      "id": "crack_1754163071650",
+      "type": "crack",
+      "confidence": 0.8051510084544569,
+      "position": [
+        0.0,
+        0.0,
+        51.638400000000004
+      ],
+      "timestamp": "2025-08-02T12:31:11.650287",
+      "severity": "low"
+    },
+    {
+      "id": "corrosion_1754163072232",
+      "type": "corrosion",
+      "confidence": 0.6921699171102528,
+      "position": [
+        0.0,
+        0.0,
+        51.31072
+      ],
+      "timestamp": "2025-08-02T12:31:12.232108",
+      "severity": "low"
+    },
+    {
+      "id": "crack_1754163073384",
+      "type": "crack",
+      "confidence": 0.7245678434881984,
+      "position": [
+        0.0,
+        0.0,
+        50.838860800000006
+      ],
+      "timestamp": "2025-08-02T12:31:13.384857",
+      "severity": "high"
+    },
+    {
+      "id": "rust_1754163073996",
+      "type": "rust",
+      "confidence": 0.6905813963255623,
+      "position": [
+        0.0,
+        0.0,
+        50.67108864000001
+      ],
+      "timestamp": "2025-08-02T12:31:13.996224",
+      "severity": "medium"
+    },
+    {
+      "id": "loose_bolt_1754163074400",
+      "type": "loose_bolt",
+      "confidence": 0.8163753346437377,
+      "position": [
+        0.9999774827624249,
+        0.0,
+        50.66437790471063
+      ],
+      "timestamp": "2025-08-02T12:31:14.400092",
+      "severity": "high"
+    },
+    {
+      "id": "rust_1754163074742",
+      "type": "rust",
+      "confidence": 0.6583501263810552,
+      "position": [
+        1.9999549655248499,
+        0.0,
+        50.65766716942126
+      ],
+      "timestamp": "2025-08-02T12:31:14.742634",
+      "severity": "low"
+    },
+    {
+      "id": "corrosion_1754163074742",
+      "type": "corrosion",
+      "confidence": 0.6791470229649773,
+      "position": [
+        1.9999549655248499,
+        0.0,
+        50.65766716942126
+      ],
+      "timestamp": "2025-08-02T12:31:14.742634",
+      "severity": "low"
+    },
+    {
+      "id": "crack_1754163075158",
+      "type": "crack",
+      "confidence": 0.7127828352176782,
+      "position": [
+        2.9999324482872747,
+        0.0,
+        50.650956434131885
+      ],
+      "timestamp": "2025-08-02T12:31:15.158838",
+      "severity": "low"
+    },
+    {
+      "id": "rust_1754163075158",
+      "type": "rust",
+      "confidence": 0.8320919181885633,
+      "position": [
+        2.9999324482872747,
+        0.0,
+        50.650956434131885
+      ],
+      "timestamp": "2025-08-02T12:31:15.158838",
+      "severity": "low"
+    },
+    {
+      "id": "crack_1754163076232",
+      "type": "crack",
+      "confidence": 0.8659596901503033,
+      "position": [
+        4.999887413812124,
+        0.0,
+        50.637534963553136
+      ],
+      "timestamp": "2025-08-02T12:31:16.232568",
+      "severity": "medium"
+    },
+    {
+      "id": "crack_1754163077391",
+      "type": "crack",
+      "confidence": 0.7971196224859084,
+      "position": [
+        6.999842379336974,
+        0.0,
+        50.62411349297439
+      ],
+      "timestamp": "2025-08-02T12:31:17.391097",
+      "severity": "medium"
+    },
+    {
+      "id": "corrosion_1754163077391",
+      "type": "corrosion",
+      "confidence": 0.7393271852712199,
+      "position": [
+        6.999842379336974,
+        0.0,
+        50.62411349297439
+      ],
+      "timestamp": "2025-08-02T12:31:17.391097",
+      "severity": "medium"
+    },
+    {
+      "id": "corrosion_1754163077988",
+      "type": "corrosion",
+      "confidence": 0.7383521233910357,
+      "position": [
+        7.999819862099399,
+        0.0,
+        50.617402757685014
+      ],
+      "timestamp": "2025-08-02T12:31:17.988259",
+      "severity": "high"
+    },
+    {
+      "id": "crack_1754163078436",
+      "type": "crack",
+      "confidence": 0.8853580054398311,
+      "position": [
+        8.999797344861824,
+        0.0,
+        50.61069202239564
+      ],
+      "timestamp": "2025-08-02T12:31:18.436558",
+      "severity": "medium"
+    },
+    {
+      "id": "corrosion_1754163078437",
+      "type": "corrosion",
+      "confidence": 0.686423667730297,
+      "position": [
+        8.999797344861824,
+        0.0,
+        50.61069202239564
+      ],
+      "timestamp": "2025-08-02T12:31:18.437558",
+      "severity": "medium"
+    },
+    {
+      "id": "crack_1754163079049",
+      "type": "crack",
+      "confidence": 0.7868858849982745,
+      "position": [
+        9.999774827624249,
+        0.0,
+        50.603981287106265
+      ],
+      "timestamp": "2025-08-02T12:31:19.049038",
+      "severity": "medium"
+    },
+    {
+      "id": "rust_1754163079049",
+      "type": "rust",
+      "confidence": 0.7003808443162759,
+      "position": [
+        9.999774827624249,
+        0.0,
+        50.603981287106265
+      ],
+      "timestamp": "2025-08-02T12:31:19.049038",
+      "severity": "low"
+    },
+    {
+      "id": "corrosion_1754163079722",
+      "type": "corrosion",
+      "confidence": 0.6867301968931749,
+      "position": [
+        10.999752310386674,
+        0.0,
+        50.59727055181689
+      ],
+      "timestamp": "2025-08-02T12:31:19.722955",
+      "severity": "high"
+    },
+    {
+      "id": "loose_bolt_1754163081156",
+      "type": "loose_bolt",
+      "confidence": 0.9399638665042709,
+      "position": [
+        12.999707275911524,
+        0.0,
+        50.58384908123814
+      ],
+      "timestamp": "2025-08-02T12:31:21.156464",
+      "severity": "high"
+    },
+    {
+      "id": "rust_1754163081820",
+      "type": "rust",
+      "confidence": 0.604090392439834,
+      "position": [
+        13.999684758673949,
+        0.0,
+        50.57713834594877
+      ],
+      "timestamp": "2025-08-02T12:31:21.820926",
+      "severity": "low"
+    },
+    {
+      "id": "rust_1754163082304",
+      "type": "rust",
+      "confidence": 0.8965977672546674,
+      "position": [
+        14.999662241436374,
+        0.0,
+        50.570427610659394
+      ],
+      "timestamp": "2025-08-02T12:31:22.304099",
+      "severity": "low"
+    },
+    {
+      "id": "corrosion_1754163082812",
+      "type": "corrosion",
+      "confidence": 0.8154616228522361,
+      "position": [
+        15.999639724198799,
+        0.0,
+        50.56371687537002
+      ],
+      "timestamp": "2025-08-02T12:31:22.812251",
+      "severity": "high"
+    },
+    {
+      "id": "corrosion_1754163084030",
+      "type": "corrosion",
+      "confidence": 0.7605320487834631,
+      "position": [
+        17.999594689723647,
+        0.0,
+        50.55029540479127
+      ],
+      "timestamp": "2025-08-02T12:31:24.031744",
+      "severity": "high"
+    },
+    {
+      "id": "loose_bolt_1754163084680",
+      "type": "loose_bolt",
+      "confidence": 0.9198245863792653,
+      "position": [
+        18.999572172486072,
+        0.0,
+        50.5435846695019
+      ],
+      "timestamp": "2025-08-02T12:31:24.680960",
+      "severity": "high"
+    }
+  ]
+}

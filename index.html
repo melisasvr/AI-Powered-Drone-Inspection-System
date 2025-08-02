@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Drone Inspection System - Live Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            margin-top: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 25px;
+            height: 75vh;
+            margin-bottom: 30px;
+        }
+        
+        .panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .panel h3 {
+            margin: 0 0 20px 0;
+            font-size: 1.3em;
+            border-bottom: 2px solid rgba(0, 255, 136, 0.5);
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .panel-icon {
+            font-size: 1.5em;
+        }
+        
+        /* Flight Path Panel */
+        .flight-path {
+            position: relative;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0,255,136,0.1) 0%, transparent 70%);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .coordinate-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .drone-path {
+            position: absolute;
+            top: 40%;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, #00ff88, #ffff00, #ff6600, #ff0000);
+            border-radius: 2px;
+            animation: pathGlow 3s ease-in-out infinite alternate;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+        
+        .drone {
+            position: absolute;
+            top: 36%;
+            left: 60%;
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle, #ff3333, #cc0000);
+            border-radius: 50%;
+            animation: droneMove 8s linear infinite;
+            box-shadow: 0 0 25px rgba(255, 51, 51, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .drone::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 2px solid rgba(255, 51, 51, 0.4);
+            border-radius: 50%;
+            animation: ping 2s ease-in-out infinite;
+        }
+        
+        .waypoint {
+            position: absolute;
+            top: 35%;
+            width: 14px;
+            height: 14px;
+            background: radial-gradient(circle, #00ff88, #00cc66);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .waypoint:nth-child(3) { left: 10%; animation-delay: 0s; }
+        .waypoint:nth-child(4) { left: 30%; animation-delay: 0.5s; }
+        .waypoint:nth-child(5) { left: 50%; animation-delay: 1s; }
+        .waypoint:nth-child(6) { left: 70%; animation-delay: 1.5s; }
+        .waypoint:nth-child(7) { left: 90%; animation-delay: 2s; }
+        
+        /* Camera Feed Panel */
+        .camera-feed {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .camera-header {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            font-size: 0.9em;
+        }
+        
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ff3333;
+            font-weight: bold;
+        }
+        
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff3333;
+            border-radius: 50%;
+            animation: blink 1s ease-in-out infinite alternate;
+        }
+        
+        .camera-image {
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    #666 0px,
+                    #666 10px,
+                    #555 10px,
+                    #555 20px
+                ),
+                linear-gradient(135deg, #777, #444);
+            position: relative;
+            background-size: 40px 40px;
+        }
+        
+        .infrastructure {
+            position: absolute;
+            top: 45%;
+            left: 15%;
+            width: 70%;
+            height: 12px;
+            background: linear-gradient(180deg, #999, #666);
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .bolt {
+            position: absolute;
+            top: 40%;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #555, #333);
+            border-radius: 50%;
+            border: 4px solid #444;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .bolt:nth-of-type(1) { left: 25%; }
+        .bolt:nth-of-type(2) { left: 48%; }
+        .bolt:nth-of-type(3) { left: 71%; }
+        
+        .bolt::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: #222;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .anomaly-box {
+            position: absolute;
+            border: 4px solid;
+            background: rgba(255, 0, 0, 0.15);
+            animation: alertBlink 1.5s ease-in-out infinite alternate;
+            border-radius: 4px;
+        }
+        
+        .crack-box {
+            top: 25%;
+            left: 30%;
+            width: 90px;
+            height: 25px;
+            border-color: #ff6600;
+            background: rgba(255, 102, 0, 0.2);
+        }
+        
+        .rust-box {
+            top: 55%;
+            left: 65%;
+            width: 55px;
+            height: 55px;
+            border-color: #ff9900;
+            background: rgba(255, 153, 0, 0.2);
+        }
+        
+        .loose-bolt-box {
+            top: 35%;
+            left: 46%;
+            width: 34px;
+            height: 34px;
+            border-color: #ff0000;
+            background: rgba(255, 0, 0, 0.3);
+        }
+        
+        .anomaly-label {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: bold;
+            white-space: nowrap;
+            border: 1px solid;
+        }
+        
+        .crack-label {
+            top: 18%;
+            left: 30%;
+            color: #ff6600;
+            border-color: #ff6600;
+        }
+        
+        .rust-label {
+            top: 48%;
+            left: 65%;
+            color: #ff9900;
+            border-color: #ff9900;
+        }
+        
+        .bolt-label {
+            top: 28%;
+            left: 46%;
+            color: #ff0000;
+            border-color: #ff0000;
+        }
+        
+        /* Anomaly Map Panel */
+        .anomaly-map {
+            position: relative;
+            background: radial-gradient(circle at center, rgba(255,0,0,0.1) 0%, transparent 70%);
+            border-radius: 15px;
+            overflow: hidden;
+            min-height: 250px;
+        }
+        
+        .map-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        .anomaly-point {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            animation: pulse 2.5s ease-in-out infinite;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            z-index: 10;
+            transform: translate(-50%, -50%);
+        }
+        
+        .anomaly-point::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 2px solid;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: ping 2s ease-in-out infinite;
+        }
+        
+        .critical { 
+            background: radial-gradient(circle, #8B0000, #660000);
+            top: 30%; 
+            left: 25%; 
+            box-shadow: 0 0 25px rgba(139, 0, 0, 0.9);
+            animation-duration: 1s;
+        }
+        
+        .critical::before {
+            border-color: #8B0000;
+        }
+        
+        .high { 
+            background: radial-gradient(circle, #ff0000, #cc0000);
+            top: 50%; 
+            left: 50%; 
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            animation-duration: 1.5s;
+        }
+        
+        .high::before {
+            border-color: #ff0000;
+        }
+        
+        .medium { 
+            background: radial-gradient(circle, #ff6600, #cc5200);
+            top: 70%; 
+            left: 75%; 
+            box-shadow: 0 0 18px rgba(255, 102, 0, 0.8);
+            animation-duration: 2s;
+        }
+        
+        .medium::before {
+            border-color: #ff6600;
+        }
+        
+        .low { 
+            background: radial-gradient(circle, #ffff00, #cccc00);
+            top: 35%; 
+            left: 80%; 
+            box-shadow: 0 0 16px rgba(255, 255, 0, 0.8);
+            animation-duration: 2.5s;
+        }
+        
+        .low::before {
+            border-color: #ffff00;
+        }
+        
+        .anomaly-info {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: bold;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 20;
+        }
+        
+        .anomaly-point:hover + .anomaly-info,
+        .anomaly-point:hover .anomaly-info {
+            opacity: 1;
+        }
+        
+        /* Status Panel */
+        .status-panel {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+        
+        .status-item {
+            margin: 12px 0;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+        
+        .status-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .status-active { border-color: #00ff88; }
+        .status-warning { border-color: #ffaa00; }
+        .status-critical { border-color: #ff3333; }
+        
+        .status-value {
+            font-weight: bold;
+            color: #00ff88;
+        }
+        
+        .anomaly-summary {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .anomaly-type {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding: 4px 0;
+        }
+        
+        .critical-alert {
+            color: #ff6666;
+            font-weight: bold;
+            animation: blink 2s ease-in-out infinite alternate;
+        }
+        
+        /* Metrics Bar */
+        .metrics {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            gap: 20px;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            flex: 1;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .metric:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00ff88;
+            display: block;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        .metric-label {
+            font-size: 1em;
+            opacity: 0.9;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        /* Console Output */
+        .console-output {
+            background: linear-gradient(145deg, #000000, #1a1a1a);
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 25px;
+            font-size: 0.9em;
+            line-height: 1.6;
+            max-height: 350px;
+            overflow-y: auto;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            position: relative;
+        }
+        
+        .console-output::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.05), transparent);
+            animation: scan 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        .timestamp {
+            color: #888;
+        }
+        
+        .log-level-info {
+            color: #00ccff;
+        }
+        
+        .log-level-warning {
+            color: #ffaa00;
+        }
+        
+        .log-level-error {
+            color: #ff6666;
+        }
+        
+        .log-level-critical {
+            color: #ff3333;
+            font-weight: bold;
+        }
+        
+        /* Report Section */
+        .report-section {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .report-section h3 {
+            margin-bottom: 20px;
+            color: #00ff88;
+            font-size: 1.5em;
+        }
+        
+        /* Animations */
+        @keyframes droneMove {
+            0% { left: 10%; }
+            20% { left: 30%; }
+            40% { left: 50%; }
+            60% { left: 70%; }
+            80% { left: 90%; }
+            100% { left: 10%; }
+        }
+        
+        @keyframes pathGlow {
+            0% { box-shadow: 0 0 10px rgba(0, 255, 136, 0.5); }
+            100% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.9); }
+        }
+        
+        @keyframes alertBlink {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        @keyframes ping {
+            0% { opacity: 1; transform: scale(0.8); }
+            100% { opacity: 0; transform: scale(2); }
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 1fr);
+                height: auto;
+            }
+            
+            .panel {
+                min-height: 400px;
+            }
+            
+            .metrics {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .panel {
+                padding: 15px;
+                min-height: 300px;
+            }
+            
+            .metrics {
+                gap: 10px;
+            }
+            
+            .metric {
+                padding: 15px;
+            }
+            
+            .metric-value {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚁 AI-Powered Drone Infrastructure Inspection</h1>
+            <div class="subtitle">Real-Time Monitoring & Anomaly Detection System</div>
+        </div>
+        
+        <div class="dashboard">
+            <!-- Flight Path Panel -->
+            <div class="panel">
+                <h3><span class="panel-icon">🗺️</span>Flight Path & Position</h3>
+                <div class="flight-path">
+                    <div class="coordinate-grid"></div>
+                    <div class="drone-path"></div>
+                    <div class="drone"></div>
+                    <div class="waypoint"></div>
+                    <div class="waypoint"></div>
+                    <div class="waypoint"></div>
+                    <div class="waypoint"></div>
+                    <div class="waypoint"></div>
+                </div>
+            </div>
+            
+            <!-- Camera Feed Panel -->
+            <div class="panel">
+                <h3><span class="panel-icon">📹</span>Live Camera Feed</h3>
+                <div class="camera-feed">
+                    <div class="camera-header">
+                        <div class="live-indicator">
+                            <div class="live-dot"></div>
+                            LIVE
+                        </div>
+                        <div>4K • 60FPS</div>
+                    </div>
+                    <div class="camera-image">
+                        <div class="infrastructure"></div>
+                        <div class="bolt"></div>
+                        <div class="bolt"></div>
+                        <div class="bolt"></div>
+                        <div class="anomaly-box crack-box"></div>
+                        <div class="anomaly-box rust-box"></div>
+                        <div class="anomaly-box loose-bolt-box"></div>
+                        <div class="anomaly-label crack-label">CRACK (0.87)</div>
+                        <div class="anomaly-label rust-label">RUST (0.74)</div>
+                        <div class="anomaly-label bolt-label">LOOSE BOLT (0.92)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Anomaly Map Panel -->
+            <div class="panel">
+                <h3><span class="panel-icon">🎯</span>Detected Anomalies</h3>
+                <div class="anomaly-map">
+                    <div class="map-grid"></div>
+                    <div class="anomaly-point critical">
+                        <div class="anomaly-info">Critical: Loose Bolt</div>
+                    </div>
+                    <div class="anomaly-point high">
+                        <div class="anomaly-info">High: Structural Crack</div>
+                    </div>
+                    <div class="anomaly-point medium">
+                        <div class="anomaly-info">Medium: Surface Rust</div>
+                    </div>
+                    <div class="anomaly-point low">
+                        <div class="anomaly-info">Low: Minor Wear</div>
+                    </div>
+                    <div class="anomaly-point critical" style="top: 60%; left: 30%;">
+                        <div class="anomaly-info">Critical: Deep Crack</div>
+                    </div>
+                    <div class="anomaly-point high" style="top: 40%; left: 65%;">
+                        <div class="anomaly-info">High: Corrosion</div>
+                    </div>
+                    <div class="anomaly-point medium" style="top: 80%; left: 45%;">
+                        <div class="anomaly-info">Medium: Rust Spot</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Status Panel -->
+            <div class="panel">
+                <h3><span class="panel-icon">📊</span>System Status</h3>
+                <div class="status-panel">
+                    <div class="status-item status-active">
+                        Flight Status: <span class="status-value">Active</span>
+                    </div>
+                    <div class="status-item status-warning">
+                        Battery Level: <span class="status-value">87.3%</span>
+                    </div>
+                    <div class="status-item status-active">
+                        Position: <span class="status-value">(320.5, 0.0, 30.0)</span>
+                    </div>
+                    <div class="status-item status-active">
+                        Waypoint: <span class="status-value">3/6</span>
+                    </div>
+                    <div class="status-item status-critical">
+                        Anomalies Detected: <span class="status-value">15</span>
+                    </div>
+                    
+                    <div class="anomaly-summary">
+                        <div class="anomaly-type">
+                            <span>• Cracks:</span> <span>5</span>
+                        </div>
+                        <div class="anomaly-type">
+                            <span>• Rust:</span> <span>4</span>
+                        </div>
+                        <div class="anomaly-type">
+                            <span>• Loose Bolts:</span> <span>3</span>
+                        </div>
+                        <div class="anomaly-type">
+                            <span>• Corrosion:</span> <span>3</span>
+                        </div>
+                        <div class="critical-alert">
+                            ⚠️ Critical Issues: 3
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="metrics">
+            <div class="metric">
+                <span class="metric-value" id="total-anomalies">15</span>
+                <span class="metric-label">Total Anomalies</span>
+            </div>
+            <div class="metric">
+                <span class="metric-value" id="battery-level">87%</span>
+                <span class="metric-label">Battery Remaining</span>
+            </div>
+            <div class="metric">
+                <span class="metric-value">3/6</span>
+                <span class="metric-label">Waypoints</span>
+            </div>
+            <div class="metric">
+                <span class="metric-value" id="critical-issues">3</span>
+                <span class="metric-label">Critical Issues</span>
+            </div>
+        </div>
+        
+        <div class="console-output" id="console">
+            <span class="timestamp">[2024-08-02 14:23:15]</span> <span class="log-level-info">Mission started - Bridge Inspection</span><br>
+            <span class="timestamp">[2024-08-02 14:23:16]</span> <span class="log-level-info">Drone taking off to altitude 50m</span><br>
+            <span class="timestamp">[2024-08-02 14:23:18]</span> <span class="log-level-info">Waypoint 1/6 reached - Bridge Approach</span><br>
+            <span class="timestamp">[2024-08-02 14:23:22]</span> <span class="log-level-warning">ANOMALY DETECTED: Crack at (245, 156) - Confidence: 0.87</span><br>
+            <span class="timestamp">[2024-08-02 14:23:25]</span> <span class="log-level-info">Waypoint 2/6 reached - Bridge Deck</span><br>
+            <span class="timestamp">[2024-08-02 14:23:28]</span> <span class="log-level-warning">ANOMALY DETECTED: Rust at (387, 298) - Confidence: 0.74</span><br>
+            <span class="timestamp">[2024-08-02 14:23:31]</span> <span class="log-level-critical">CRITICAL ANOMALY: Loose Bolt at (320, 240) - Confidence: 0.92</span><br>
+            <span class="timestamp">[2024-08-02 14:23:33]</span> <span class="log-level-info">Waypoint 3/6 reached - Bridge Center</span><br>
+            <span class="timestamp">[2024-08-02 14:23:36]</span> <span class="log-level-warning">ANOMALY DETECTED: Corrosion at (156, 203) - Confidence: 0.81</span><br>
+            <span class="timestamp">[2024-08-02 14:23:38]</span> <span class="log-level-info">Battery level: 87.3%</span><br>
+            <span class="timestamp">[2024-08-02 14:23:40]</span> <span class="log-level-info">Continuing inspection...</span><br>
+            <span class="timestamp">[2024-08-02 14:23:42]</span> <span class="log-level-error">HIGH PRIORITY: Multiple structural issues detected in sector 3</span><br>
+            <span class="timestamp">[2024-08-02 14:23:45]</span> <span class="log-level-info">AI processing image analysis...</span><br>
+        </div>
+        
+        <div class="report-section">
+            <h3>📋 Live Inspection Report</h3>
+            <div class="console-output">
+==================================================<br>
+<span class="log-level-info">REAL-TIME INSPECTION REPORT</span><br>
+==================================================<br>
+Date: <span class="status-value">2024-08-02T14:25:42.123456</span><br>
+Total Anomalies Detected: <span class="status-value">15</span><br>
+Battery Used: <span class="status-value">12.7%</span><br>
+Flight Path Points: <span class="status-value">178</span><br>
+Mission Progress: <span class="status-value">50%</span><br><br>
+
+<span class="log-level-warning">Anomalies by Type:</span><br>
+&nbsp;&nbsp
